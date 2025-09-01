@@ -1,0 +1,29 @@
+POST http://localhost:8080/authors?limit=36&offset=8
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+content-length: 0
+
+<> 2025-09-01T111240.500.json
+
+###
+
+POST http://localhost:8080/authors?limit=88&offset=99
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+content-length: 0
+
+<> 2025-09-01T111220.500.json
+
+###
+
+GET http://localhost:8080/authors/search?authorName=sYUKEBgY
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2025-09-01T082549.500.json
+
+###
+
