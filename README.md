@@ -1,4 +1,4 @@
-# Library Management System API
+# Library Management System
 
 ## Overview
 
