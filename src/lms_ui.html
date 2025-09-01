@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System UI</title>
+    <!-- Tailwind CSS for modern styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-4 sm:p-8">
+<div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-6 sm:p-10">
+    <header class="text-center mb-10">
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-2">Library Management System</h1>
+        <p class="text-md sm:text-lg text-gray-600">Interact with your Dropwizard backend.</p>
+    </header>
+
+    <!-- Message Box -->
+    <div id="message-box" class="hidden mb-6 p-4 rounded-lg text-sm transition-opacity duration-300"></div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Authors Section -->
+        <div class="bg-gray-50 p-6 rounded-lg shadow-inner border border-gray-200">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Authors</h2>
+
+            <!-- Create Author Form -->
+            <form id="create-author-form" class="mb-6 space-y-4">
+                <h3 class="font-semibold text-lg text-gray-700">Create New Author</h3>
+                <input type="text" id="create-author-name" placeholder="Author Name" required
+                       class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                <input type="number" id="create-author-birth-year" placeholder="Birth Year" required
+                       class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                <button type="submit" class="w-full bg-indigo-600 text-white py-2 rounded-md font-bold hover:bg-indigo-700 transition-colors">Create Author</button>
+            </form>
+
+            <!-- Get All Authors Button -->
+            <button id="get-authors-btn" class="w-full bg-gray-700 text-white py-2 rounded-md font-bold hover:bg-gray-800 transition-colors">Get All Authors</button>
+            <div id="authors-list" class="mt-4 p-4 bg-white rounded-md border border-gray-300 overflow-x-auto text-sm font-mono"></div>
+        </div>
+
+        <!-- Books Section -->
+        <div class="bg-gray-50 p-6 rounded-lg shadow-inner border border-gray-200">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Books</h2>
+
+            <!-- Create Book Form -->
+            <form id="create-book-form" class="mb-6 space-y-4">
+                <h3 class="font-semibold text-lg text-gray-700">Create New Book</h3>
+                <input type="text" id="create-book-title" placeholder="Book Title" required
+                       class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                <input type="number" id="create-book-author-id" placeholder="Author ID" required
+                       class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                <button type="submit" class="w-full bg-indigo-600 text-white py-2 rounded-md font-bold hover:bg-indigo-700 transition-colors">Create Book</button>
+            </form>
+
+            <!-- Get All Books Button -->
+            <button id="get-books-btn" class="w-full bg-gray-700 text-white py-2 rounded-md font-bold hover:bg-gray-800 transition-colors">Get All Books</button>
+            <div id="books-list" class="mt-4 p-4 bg-white rounded-md border border-gray-300 overflow-x-auto text-sm font-mono"></div>
+        </div>
+    </div>
+
+    <div class="mt-8">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4 text-center">Update/Delete Operations</h2>
+        <p class="text-center text-gray-600 mb-6">Enter the ID of the resource you want to update or delete.</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <!-- Update/Delete Author Form -->
+            <div class="bg-gray-50 p-6 rounded-lg shadow-inner border border-gray-200">
+                <h3 class="font-semibold text-lg text-gray-700 mb-4">Update/Delete Author</h3>
+                <input type="number" id="author-id-input" placeholder="Author ID" required
+                       class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 mb-4">
+                <input type="text" id="update-author-name" placeholder="New Author Name"
+                       class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 mb-2">
+                <input type="number" id="update-author-birth-year" placeholder="New Birth Year"
+                       class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 mb-4">
+                <div class="flex space-x-2">
+                    <button id="update-author-btn" class="w-1/2 bg-blue-600 text-white py-2 rounded-md font-bold hover:bg-blue-700 transition-colors">Update Author</button>
+                    <button id="delete-author-btn" class="w-1/2 bg-red-600 text-white py-2 rounded-md font-bold hover:bg-red-700 transition-colors">Delete Author</button>
+                </div>
+            </div>
+
+            <!-- Update/Delete Book Form -->
+            <div class="bg-gray-50 p-6 rounded-lg shadow-inner border border-gray-200">
+                <h3 class="font-semibold text-lg text-gray-700 mb-4">Update/Delete Book</h3>
+                <input type="number" id="book-id-input" placeholder="Book ID" required
+                       class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 mb-4">
+                <input type="text" id="update-book-title" placeholder="New Book Title"
+                       class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 mb-2">
+                <input type="number" id="update-book-author-id" placeholder="New Author ID"
+                       class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 mb-4">
+                <div class="flex space-x-2">
+                    <button id="update-book-btn" class="w-1/2 bg-blue-600 text-white py-2 rounded-md font-bold hover:bg-blue-700 transition-colors">Update Book</button>
+                    <button id="delete-book-btn" class="w-1/2 bg-red-600 text-white py-2 rounded-md font-bold hover:bg-red-700 transition-colors">Delete Book</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Base URL for the API
+    const API_URL = 'http://localhost:8080';
+
+    // Helper function to show messages to the user
+    function showMessage(message, type = 'info') {
+        const messageBox = document.getElementById('message-box');
+        let color = '';
+        if (type === 'success') {
+            color = 'bg-green-100 text-green-800';
+        } else if (type === 'error') {
+            color = 'bg-red-100 text-red-800';
+        } else {
+            color = 'bg-blue-100 text-blue-800';
+        }
+        messageBox.className = `block mb-6 p-4 rounded-lg text-sm transition-opacity duration-300 ${color}`;
+        messageBox.textContent = message;
+        setTimeout(() => {
+            messageBox.classList.add('opacity-0');
+            setTimeout(() => {
+                messageBox.classList.remove('opacity-0');
+                messageBox.classList.add('hidden');
+            }, 300);
+        }, 5000);
+    }
+
+    // Fetch API wrapper with error handling
+    async function fetchAPI(url, method, data = null) {
+        try {
+            const options = {
+                method: method,
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            };
+            if (data) {
+                options.body = JSON.stringify(data);
+            }
+
+            const response = await fetch(url, options);
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            // DELETE requests might not have a body
+            if (method === 'DELETE') {
+                return null;
+            }
+            return await response.json();
+        } catch (error) {
+            showMessage(`Error: ${error.message}`, 'error');
+            console.error('Fetch error:', error);
+            return null;
+        }
+    }
+
+    // --- Authors API Calls ---
+
+    // GET all authors
+    document.getElementById('get-authors-btn').addEventListener('click', async () => {
+        const authors = await fetchAPI(`${API_URL}/authors`, 'GET');
+        const authorsList = document.getElementById('authors-list');
+        authorsList.textContent = authors ? JSON.stringify(authors, null, 2) : 'Failed to fetch authors.';
+    });
+
+    // POST a new author
+    document.getElementById('create-author-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const name = document.getElementById('create-author-name').value;
+        const birthYear = parseInt(document.getElementById('create-author-birth-year').value);
+        const newAuthor = { name: name, birth_year: birthYear };
+
+        const result = await fetchAPI(`${API_URL}/authors`, 'POST', newAuthor);
+        if (result) {
+            showMessage(`Author created with ID: ${result.id}`, 'success');
+            document.getElementById('create-author-form').reset();
+        }
+    });
+
+    // PUT to update an author
+    document.getElementById('update-author-btn').addEventListener('click', async () => {
+        const id = document.getElementById('author-id-input').value;
+        const name = document.getElementById('update-author-name').value;
+        const birthYear = parseInt(document.getElementById('update-author-birth-year').value);
+
+        if (!id || !name || !birthYear) {
+            showMessage('Please provide Author ID, Name, and Birth Year for update.', 'error');
+            return;
+        }
+
+        const updatedAuthor = { id: parseInt(id), name: name, birth_year: birthYear };
+        const result = await fetchAPI(`${API_URL}/authors/${id}`, 'PUT', updatedAuthor);
+        if (result) {
+            showMessage(`Author with ID ${id} updated successfully.`, 'success');
+        }
+    });
+
+    // DELETE an author
+    document.getElementById('delete-author-btn').addEventListener('click', async () => {
+        const id = document.getElementById('author-id-input').value;
+        if (!id) {
+            showMessage('Please provide an Author ID to delete.', 'error');
+            return;
+        }
+
+        const result = await fetchAPI(`${API_URL}/authors/${id}`, 'DELETE');
+        if (result === null) {
+            showMessage(`Author with ID ${id} deleted successfully.`, 'success');
+        }
+    });
+
+
+    // --- Books API Calls ---
+
+    // GET all books
+    document.getElementById('get-books-btn').addEventListener('click', async () => {
+        const books = await fetchAPI(`${API_URL}/books`, 'GET');
+        const booksList = document.getElementById('books-list');
+        booksList.textContent = books ? JSON.stringify(books, null, 2) : 'Failed to fetch books.';
+    });
+
+    // POST a new book
+    document.getElementById('create-book-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const title = document.getElementById('create-book-title').value;
+        const authorId = parseInt(document.getElementById('create-book-author-id').value);
+        const newBook = { title: title, author_id: authorId };
+
+        const result = await fetchAPI(`${API_URL}/books`, 'POST', newBook);
+        if (result) {
+            showMessage(`Book created with ID: ${result.id}`, 'success');
+            document.getElementById('create-book-form').reset();
+        }
+    });
+
+    // PUT to update a book
+    document.getElementById('update-book-btn').addEventListener('click', async () => {
+        const id = document.getElementById('book-id-input').value;
+        const title = document.getElementById('update-book-title').value;
+        const authorId = parseInt(document.getElementById('update-book-author-id').value);
+
+        if (!id || !title || !authorId) {
+            showMessage('Please provide Book ID, Title, and Author ID for update.', 'error');
+            return;
+        }
+
+        const updatedBook = { id: parseInt(id), title: title, author_id: authorId };
+        const result = await fetchAPI(`${API_URL}/books/${id}`, 'PUT', updatedBook);
+        if (result) {
+            showMessage(`Book with ID ${id} updated successfully.`, 'success');
+        }
+    });
+
+    // DELETE a book
+    document.getElementById('delete-book-btn').addEventListener('click', async () => {
+        const id = document.getElementById('book-id-input').value;
+        if (!id) {
+            showMessage('Please provide a Book ID to delete.', 'error');
+            return;
+        }
+
+        const result = await fetchAPI(`${API_URL}/books/${id}`, 'DELETE');
+        if (result === null) {
+            showMessage(`Book with ID ${id} deleted successfully.`, 'success');
+        }
+    });
+
+</script>
+</body>
+</html>
