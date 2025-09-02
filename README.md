@@ -18,6 +18,7 @@ This is a RESTful API for a simple Library Management System. It provides endpoi
     * Centralized configuration using YAML.
     * Secure handling of database credentials using environment variables.
     * Unit tests for core service logic using JUnit and Mockito.
+    * Integration tests for the entire request-response cycle and API endpoints.
 
 ## Prerequisites
 
