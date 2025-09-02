@@ -14,7 +14,6 @@ public class BookService {
     }
 
     public Book createBook(Book book) {
-        // Business logic, e.g., validating the authorId
         long newId = bookDAO.create(book);
         book.setId(newId);
         return book;
@@ -34,13 +33,10 @@ public class BookService {
         return bookDAO.findByTitle("%" + title + "%");
     }
 
-    // Corrected method signature to accept a single Book object
     public void updateBook(Book updatedBook) {
-        // The DAO handles the update based on the ID within the book object.
         bookDAO.update(updatedBook);
     }
 
-    // Corrected method signature to match DAO
     public void deleteBookById(long id) {
         bookDAO.delete(id);
     }

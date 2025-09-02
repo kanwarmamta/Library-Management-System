@@ -141,3 +141,4 @@ The API follows a RESTful design. All endpoints accept and return JSON.
 * The `lms` database and the `authors` and `books` tables exist with the specified schemas.
 * An existing author ID is required to create a new book.
 * The `Book` and `Author` beans use standard getters and setters that align with the JSON property names.
+* To delete an author all its publications must be deleted first.

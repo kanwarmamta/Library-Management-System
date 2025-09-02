@@ -15,9 +15,6 @@ import io.dropwizard.jdbi3.JdbiFactory;
 import io.dropwizard.migrations.MigrationsBundle;
 import org.jdbi.v3.core.Jdbi;
 import io.dropwizard.configuration.SubstitutingSourceProvider;
-import org.apache.commons.text.lookup.StringLookup;
-import org.apache.commons.text.lookup.StringLookupFactory;
-
 
 import javax.servlet.DispatcherType;
 import javax.servlet.FilterRegistration;
