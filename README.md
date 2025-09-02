@@ -85,7 +85,7 @@ Before running the application, ensure you have the following software installed
 
 ## API Documentation
 
-The API follows a RESTful design. All endpoints accept and return JSON.
+The API follows a RESTful design. All endpoints accept and return JSON. Responsible files - AuthorResource.java, BookResource.java.
 
 ### Authors
 
